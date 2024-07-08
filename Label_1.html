@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Label Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Generate Barcode Labels with Excel</h1>
+    <input type="file" id="fileInput" accept=".xlsx">
+    <button onclick="downloadSampleFile()">Download Sample Data File</button>
+    <button onclick="reloadPage()">Reload</button>
+    <button onclick="generatePDF()">Generate Labels</button>
+    <div id="errorMessage" style="color: red; margin-top: 10px;"></div>
+    <canvas id="barcode" style="display: none;"></canvas>
+    <canvas id="barcodeRef" style="display: none;"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
