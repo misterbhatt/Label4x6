@@ -65,6 +65,10 @@ function generatePDF() {
             const receiverAddressLine2 = doc.splitTextToSize(row['Receiver Address Line 2'] || '', 3.6);
             doc.text(receiverAddressLine2, 0.2, yPos);
             yPos += 0.2 * receiverAddressLine2.length;
+            doc.text(`City: ${row['City'] || ''}`, 0.2, yPos);
+            yPos += 0.2;
+            doc.text(`State: ${row['State'] || ''}`, 0.2, yPos);
+            yPos += 0.2;
             doc.text(`Pincode: ${row['Receiver Pincode'] || ''}`, 0.2, yPos);
             yPos += 0.2;
             
@@ -83,19 +87,26 @@ function generatePDF() {
             JsBarcode("#barcode", row['Airwaybill Number'] || '', {format: "CODE128"});
             doc.addImage(document.getElementById('barcode').toDataURL(), 'PNG', 2, yPos - 0.2, 1.6, 0.4);
             yPos += 0.3;
-
-            doc.setFontSize(9);
+            
+            doc.setFontSize(8);
+            doc.setFont("helvetica", "bold");
+            doc.text('SKU:-', 0.2, yPos);
             doc.setFont("helvetica", "normal");
             yPos += 0.2;
-            doc.text(`SKU Number: ${row['SKU Number'] || ''}`, 0.2, yPos);
-            yPos += 0.2;
+            const SKUNumber = doc.splitTextToSize(`${row['SKU Number'] || ''}`, 3.6);
+            doc.text(SKUNumber, 0.2, yPos);
+            yPos += 0.2 * SKUNumber.length;
+
+            doc.setFontSize(8);
+            doc.setFont("helvetica", "normal");
+            //yPos += 0.2;
             doc.text(`Weight: ${row['Weight'] || ''}`, 0.2, yPos);
             doc.text(`Quantity: ${row['Quantity'] || ''}`, 2.0, yPos);  // Adjust the x position for Quantity
             yPos += 0.2;
             doc.text(`Amount: ${row['Amount'] || ''}`, 0.2, yPos);
             yPos += 0.2;
             
-            doc.setFontSize(9);
+            doc.setFontSize(8);
             doc.setFont("helvetica", "bold");
             doc.text('Description:-', 0.2, yPos);
             doc.setFont("helvetica", "normal");
@@ -156,6 +167,8 @@ function downloadSampleFile() {
             "Receiver Phone": "1234567890",
             "Receiver Address Line 1": "123 Main St",
             "Receiver Address Line 2": "",
+            "City": "Delhi",
+            "State":"Delhi",
             "Receiver Pincode": "123456",
             "SKU Number": "SKU123",
             "Weight": "0.5",
